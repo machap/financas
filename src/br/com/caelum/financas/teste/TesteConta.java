@@ -5,32 +5,40 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.caelum.financas.modelo.Conta;
+import br.com.caelum.financas.util.JPAUtil;
 
 public class TesteConta {
-	
+
 	public static void main(String[] args) {
-		
+
 		Conta conta = new Conta();
-		
-		conta.setTitular("Paulo Victor");
-		conta.setConta("Caixa Economica");
-		conta.setAgencia("123");
-		conta.setNumero("456");
-		
-		//Fabrica que cria a EntiryMagneger, com base na unidade de persistencia do XML
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("financas");
-		//Essa é a classe principal para gerenciar as entidades e todas as operações
-		EntityManager em = emf.createEntityManager();
-		
-		//Inicia uma trasação
+
+		conta.setTitular("p");
+		conta.setBanco("C");
+		conta.setAgencia("q");
+		conta.setConta("q");
+
+		// Essa é a classe principal para gerenciar as entidades e todas as operações
+		EntityManager em = new JPAUtil().getEntityManager();
+
+		// Inicia uma trasação
 		em.getTransaction().begin();
 		em.persist(conta);
-		//Persiste o dado
+		// Persiste o dado
 		em.getTransaction().commit();
-		
-		//Encerra 
+		// Encerra
 		em.close();
-		emf.close();
+
+		EntityManager em2 = new JPAUtil().getEntityManager();
+		em2.getTransaction().begin();
+
+		conta.setTitular("Leonardo");
+		// Transforma a conta em managed novamente, pois ela já foi encerrada anteriormente.
+		em2.merge(conta);
+
+		em2.getTransaction().commit();
+		em2.close();
+
 	}
 
 }

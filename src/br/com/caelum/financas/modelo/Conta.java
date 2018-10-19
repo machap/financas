@@ -12,7 +12,7 @@ public class Conta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titular;
-	private String numero;
+	private String banco;
 	private String conta;
 	private String agencia;
 
@@ -32,12 +32,12 @@ public class Conta {
 		this.titular = titular;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getBanco() {
+		return banco;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setBanco(String banco) {
+		this.banco = banco;
 	}
 
 	public String getConta() {
