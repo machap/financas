@@ -14,16 +14,11 @@ public class TesteBuscaConta {
 		em.getTransaction().begin();
 		
 		//conta vai receber todos os dados do banco referente ao id passado.
-		Conta conta = em.find(Conta.class, 6);
-		
-		//conta.setTitular("João Amoedo");
-		conta.setBanco("104 - CAIXA ECONOMICA FEDERAL");
-		//conta.setAgencia("4376");
-		//conta.setConta("12908-0");
-		
+		Conta conta = em.find(Conta.class, 1);
+				
 		em.getTransaction().commit();
 		
-		//System.out.println("Nome: " + conta.getTitular());
+		System.out.println("Nome: " + conta.getTitular());
 		
 		em.close();
 	}
